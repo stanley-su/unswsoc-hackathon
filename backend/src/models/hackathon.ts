@@ -5,5 +5,7 @@ function getAllHackathons() {
 };
 
 function getCurrentHackathons() {
-  return pool.query("SELECT * FROM hackathon WHERE start_date::date < NOW()")
+  return pool.query("SELECT * FROM hackathon WHERE end_date::date >= NOW()")
 };
+
+export { getAllHackathons, getCurrentHackathons };
