@@ -15,12 +15,13 @@ async function createNewHackathon(title: string, startDate: Date, endDate: Date,
     await client.query("BEGIN");
     const insertText = `INSERT INTO hackathon(title, description, start_date, end_date)
                         VALUES ($1, $2, $3, $4);`;
-    const insertValues = [title, startDate, endDate, description];
+    const insertValues = [title, description, startDate, endDate];
     await client.query(insertText, insertValues);
     await client.query("COMMIT");
     client.release();
   } catch (e) {
     await client.query("ROLLBACK");
+    client.release();
     throw e;
   }
 }
