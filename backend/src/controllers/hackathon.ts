@@ -1,5 +1,13 @@
 import express from "express";
+import { nextTick } from "process";
 import * as model from "../models/hackathon";
+
+interface newHackathonRequest {
+  title: string,
+  startDate: string,
+  endDate: string,
+  description: string
+}
 
 async function getAllHackathons(_: express.Request, res: express.Response) {
   const queryResult = await model.getAllHackathons();
@@ -11,5 +19,15 @@ async function getCurrentHackathons(_: express.Request, res: express.Response) {
   res.send(queryResult.rows);
 };
 
+async function createNewHackathon(req: express.Request, res: express.Response) {
+  const { title, startDate, endDate, description }: newHackathonRequest = req.body;
 
-export { getAllHackathons, getCurrentHackathons };
+  try {
+    await model.createNewHackathon(title, new Date(startDate), new Date(endDate), description);
+    res.status(200).send({status: "successful"});
+  } catch (e) {
+    res.status(500).send({ error: e });
+  };
+}
+
+export { getAllHackathons, getCurrentHackathons, createNewHackathon };
