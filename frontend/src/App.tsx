@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import Feature from "./feature/Feature";
 
@@ -15,7 +15,12 @@ function App() {
   }, []);
 
   return (
-    <Feature text={result} />
+    <>
+      <Feature text={result} />
+      <a href="https://github.com/login/oauth/authorize?client_id=79f0eb09798bde55df9e">
+        Sign In with GitHub
+      </a>
+    </>
   );
 }
 
