@@ -1,5 +1,4 @@
 import express from "express";
-import { nextTick } from "process";
 import * as model from "../models/hackathon";
 
 interface newHackathonRequest {
