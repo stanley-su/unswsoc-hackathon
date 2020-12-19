@@ -8,3 +8,10 @@
 
 ``/hackathon/new``
 - Creates a new hackathon.
+
+## Project Routes
+``/project``
+- Gets a list of matching projects.
+- Query parameters:
+    - projectId: the unique identifier for a project.
+    - hackathonId: the unique identifier for a hackathon.
