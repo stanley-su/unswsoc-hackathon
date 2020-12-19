@@ -10,7 +10,7 @@ async function makeComment(projectId: number, userId: number, contents: string) 
   try {
     await client.query("BEGIN");
     const insertText = `INSERT INTO comment(contents, project_id, person_id)
-                        VALUES ('TEST COMMENT', 1, 1)`;
+                        VALUES ($1, $2, $3)`;
     const insertValues = [contents, projectId, userId];
     await client.query(insertText, insertValues);
     await client.query("COMMIT");
