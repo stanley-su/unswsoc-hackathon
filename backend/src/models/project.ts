@@ -8,4 +8,8 @@ function getSingleProject(projectId: string) {
   return pool.query("SELECT * from project where project_id = $1", [projectId]);
 };
 
-export { getAllProjects, getSingleProject };
+function getProjectsForHackathon(hackathonId: string) {
+  return pool.query("SELECT * from project where hackathon_id = $1", [hackathonId]);
+}
+
+export { getAllProjects, getSingleProject, getProjectsForHackathon };
