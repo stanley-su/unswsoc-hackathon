@@ -34,7 +34,23 @@ app.get("/user/signin/callback", (req, res, next) => {
     .then(function (result) {
       const data = result.body;
 
-      res.send(data);
+      res.cookie("session", data.access_token);
+      res.redirect("http://localhost:3000");
+    });
+});
+
+app.get("/user", (req, res, next) => {
+  const accessToken = req.headers.cookie.split("session=")[1];
+
+  request
+    .get("https://api.github.com/user")
+    .set("Authorization", "token " + accessToken)
+    .set("User-Agent", "Mozilla/5.0")
+    .then(function (result) {
+      res.send(result.body);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 
