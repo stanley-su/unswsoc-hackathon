@@ -30,4 +30,4 @@ async function createNewProject(title: string, startDate: Date, endDate: Date, d
   };
 };
 
-export { getAllProjects, getSingleProject, getProjectsForHackathon };
+export { getAllProjects, getSingleProject, getProjectsForHackathon, createNewProject };
