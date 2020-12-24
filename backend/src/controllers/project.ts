@@ -32,4 +32,4 @@ async function createNewProject(req: express.Request, res: express.Response) {
   };
 }
 
-export { getProject };
+export { getProject, createNewProject };
