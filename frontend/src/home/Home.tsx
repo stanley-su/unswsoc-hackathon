@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, CardColumns } from "react-bootstrap";
+import { Container, CardColumns, Row, Col, Form, FormControl, Button } from "react-bootstrap";
 
 import ProjectCard from "./ProjectCard";
 
@@ -18,7 +18,25 @@ function Home() {
     <Container
       className="mt-5"
     >
-      <CardColumns>
+      <Row>
+        <Col>
+          <h2>Projects</h2>
+        </Col>
+
+        <Col>
+          <Form 
+            inline
+            className="justify-content-end"  
+          >
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-primary">Search</Button>
+          </Form>
+        </Col>
+      </Row>
+
+      <CardColumns
+        className="mt-3"
+      >
         {projects.map(project => (
           <ProjectCard projectDetails={project} />
         ))}
