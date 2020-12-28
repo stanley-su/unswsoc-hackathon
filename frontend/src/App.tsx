@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import NavBar from "./navbar/NavBar";
 import Feature from "./feature/Feature";
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
   }, []);
 
   return (
-    <Feature text={result} />
+    <>
+      <NavBar />
+    </>
   );
 }
 
