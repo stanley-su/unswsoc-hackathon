@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import NavBar from "./navbar/NavBar";
-import Feature from "./feature/Feature";
+import Home from "./home/Home";
+import Leaderboard from "./leaderboard/LeaderBoard";
+import About from "./about/About";
 
 function App() {
-  const [result, setResult] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("/project");
-      const result = await response.json();
-
-      setResult(result[0].title);
-    })();
-  }, []);
-
   return (
-    <>
+    <BrowserRouter>
       <NavBar />
-    </>
+
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/leaderboard">
+          <Leaderboard />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
