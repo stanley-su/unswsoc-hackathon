@@ -17,11 +17,10 @@ function NavBar() {
             <Nav.Link href="leaderboard">Leaderboard</Nav.Link>
             <Nav.Link href="about">About</Nav.Link>
           </Nav>
+          <Form inline>
+            <Button variant="outline-primary">Login</Button>
+          </Form>
         </Navbar.Collapse>
-
-        <Form inline>
-          <Button variant="outline-primary">Login</Button>
-        </Form>
       </Container>
     </Navbar>
   );
