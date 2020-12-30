@@ -12,10 +12,11 @@ function LeaderBoard() {
 
   useEffect(() => {
     (async () => {
-      const data = await fetch("api/person");
+      const data = await fetch("api/person/leaderboard");
       const json = await data.json();
       setLeaderBoard(json);
-      console.log(json);
+      console.log(data);
+      console.log("test");
     })();
   }, []);
 
