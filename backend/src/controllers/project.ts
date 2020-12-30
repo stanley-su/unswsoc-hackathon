@@ -14,7 +14,7 @@ async function getProject(req: express.Request, res: express.Response) {
   const queryResult = await model.getProject(projectId, hackathonId, personId);
   
 
-  if (projectId || hackathonId || personId)
+  if (projectId)
     res.send(queryResult.rows[0]);
   else
     res.send(queryResult.rows);
