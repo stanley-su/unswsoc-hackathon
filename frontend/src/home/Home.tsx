@@ -9,11 +9,11 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const data = await fetch("/project");
+      const data = await fetch("api/project");
       const json = await data.json();
       setProjects(json);
     })();
-  });
+  }, []);
 
   return (
     <Container
