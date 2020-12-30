@@ -3,9 +3,9 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 
 interface Person {
   user_id: number,
-  name: string
+  name: string,
+  project_count: number
 }
-
 
 function LeaderBoard() {
   const [leaderBoard, setLeaderBoard] = useState<Person[]>([]);
@@ -42,7 +42,7 @@ function LeaderBoard() {
             <tr>
               <th>{person.name}</th>
               <th>0</th>
-              <th>0</th>
+              <th>{person.project_count}</th>
             </tr>
           ))}
         </tbody>
