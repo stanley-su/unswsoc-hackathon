@@ -1,15 +1,15 @@
 import pool from "../dbConfig/dbConfig";
 
-function getAllProjects() {
-  return pool.query("SELECT * from project");
-};
-
-function getSingleProject(projectId: string) {
-  return pool.query("SELECT * from project where project_id = $1", [projectId]);
-};
-
-function getProjectsForHackathon(hackathonId: string) {
-  return pool.query("SELECT * from project where hackathon_id = $1", [hackathonId]);
+function getProject(projectId: number=null, hackathonId: number=null, personId: number=null) {
+  return pool.query(
+    `
+    SELECT * 
+    FROM project 
+    WHERE project_id = COALESCE($1, project_id) 
+          and hackathon_id = COALESCE($2, hackathon_id)
+          and person_id = COALESCE($3, person_id)
+    `
+  , [projectId, hackathonId, personId]);
 };
 
 async function createNewProject(title: string, startDate: Date, endDate: Date, description: string="") {
@@ -30,4 +30,4 @@ async function createNewProject(title: string, startDate: Date, endDate: Date, d
   };
 };
 
-export { getAllProjects, getSingleProject, getProjectsForHackathon, createNewProject };
+export { getProject, createNewProject };

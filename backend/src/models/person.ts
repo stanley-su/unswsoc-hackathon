@@ -1,5 +1,9 @@
 import pool from "../dbConfig/dbConfig";
 
+function getPerson(id: number) {
+  return pool.query("SELECT * from person where person_id = $1", [id]);
+};
+
 function getLeaderBoard() {
   return pool.query(
     `
@@ -15,4 +19,4 @@ function getLeaderBoard() {
   );
 };
 
-export { getLeaderBoard };
+export { getPerson, getLeaderBoard };

@@ -3,6 +3,7 @@ const router = express.Router();
 
 import * as controller from "../controllers/person";
 
-router.get("/", controller.getLeaderBoard);
+router.get("/", controller.getPerson);
+router.get("/leaderboard", controller.getLeaderBoard);
 
 export default router;

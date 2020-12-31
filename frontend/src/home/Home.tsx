@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, CardColumns, Row, Col, Form, FormControl, Button, Dropdown } from "react-bootstrap";
+import { Container, CardColumns, Row, Col, Form } from "react-bootstrap";
 
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "../projectCard/ProjectCard";
 
 function Home() {
   const [projects, setProjects] = useState([]);

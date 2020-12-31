@@ -5,6 +5,7 @@ import NavBar from "./navbar/NavBar";
 import Home from "./home/Home";
 import Leaderboard from "./leaderboard/LeaderBoard";
 import About from "./about/About";
+import User from "./user/User";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/user/:id">
+          <User />
         </Route>
       </Switch>
     </BrowserRouter>
