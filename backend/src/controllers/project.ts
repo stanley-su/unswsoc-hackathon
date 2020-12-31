@@ -1,14 +1,34 @@
 import express from "express";
 import * as model from "../models/project";
 
-async function getProject(req: express.Request, res: express.Response) {
-  if (req.query.person_id) {
-    const queryResult = await model.getSingleProject((req.query as any).person_id);
-    res.send(queryResult.rows);
-  } else {
-    const queryResult = await model.getAllProjects();
-    res.send(queryResult.rows);
-  }    
+interface newProjectRequest {
+  title: string,
+  startDate: string,
+  endDate: string,
+  description: string
 }
 
-export { getProject };
+async function getProject(req: express.Request, res: express.Response) {
+  const { projectId, hackathonId, personId } = req.query as any;
+
+  const queryResult = await model.getProject(projectId, hackathonId, personId);
+  
+
+  if (projectId)
+    res.send(queryResult.rows[0]);
+  else
+    res.send(queryResult.rows);
+}
+
+async function createNewProject(req: express.Request, res: express.Response) {
+  const { title, startDate, endDate, description }: newProjectRequest = req.body;
+
+  try {
+    await model.createNewProject(title, new Date(startDate), new Date(endDate), description);
+    res.status(200).send({ status: "successful" });
+  } catch (e) {
+    res.status(500).send({ error: e });
+  };
+}
+
+export { getProject, createNewProject };
