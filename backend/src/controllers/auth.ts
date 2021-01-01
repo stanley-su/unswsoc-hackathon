@@ -2,6 +2,24 @@ require("dotenv").config();
 import express from "express";
 import request from "superagent";
 
+function loginSuccess(req: express.Request, res: express.Response) {
+  if ((req as any)?.user) {
+    res.json({
+      success: true,
+      message: "user has successfully authenticated",
+      user: (req as any).user,
+      cookies: req.cookies
+    });
+  }
+};
+
+function loginFail(req: express.Request, res: express.Response) {
+  res.status(401).json({
+    success: false,
+    message: "user failed to authenticate."
+  });
+};
+
 async function signinCallback(req: express.Request, res: express.Response) {
   const { query } = req;
   const { code } = query;
@@ -42,4 +60,4 @@ function getAccessToken(req: express.Request, res: express.Response) {
     });
 };
 
-export { signinCallback, getAccessToken };
+export { loginSuccess, loginFail, signinCallback, getAccessToken };
