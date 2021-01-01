@@ -1,5 +1,6 @@
 import express from "express";
 import passport from "passport";
+const passportSetup = require("./config/passportSetup");
 
 import projectRouter from "./routes/project";
 import hackathonRouter from "./routes/hackathon";

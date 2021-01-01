@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/redirect"
+      callbackURL: "/auth/github/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
       // find current user in UserModel
@@ -38,12 +38,20 @@ passport.use(
 
         const query = await userDb.getPersonByGitHub(profile.id);
         const newUser = query.rows;
-  
-        if (newUser) {
-          done(null, newUser[0]);
+
+        if (newUser.length) {
+          const sessionUser = {
+            id: newUser[0].github_id,
+            name: newUser[0].name
+          }
+          done(null, sessionUser);
         }
       }
-      done(null, currentUser[0]);
+      const sessionUser = {
+        id: currentUser[0].github_id,
+        name: currentUser[0].name
+      }
+      done(null, sessionUser);
     }
   )
 );
