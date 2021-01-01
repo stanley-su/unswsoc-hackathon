@@ -5,7 +5,7 @@ function getPerson(id: number) {
 };
 
 function getPersonByGitHub(githubId: number) {
-  return pool.query("SELECT * from person where githubId = $1", [githubId]);
+  return pool.query("SELECT * from person where github_id = $1", [githubId]);
 };
 
 async function createPerson(githubId: number) {
