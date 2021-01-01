@@ -8,10 +8,22 @@ import About from "./about/About";
 import User from "./user/User";
 
 function App() {
+  useEffect(() => {
+    (async () => {
+      const code = window.location.search.split("=").length ? window.location.search.split("=")[1] : "";
+      if (code) {
+        const res = await fetch(`api/authentication/signin/callback?code=${code}`, {
+          method: "POST"
+        });
+        const accessToken = await res.json();
+      };
+    })();
+  }, []);
+
   return (
     <BrowserRouter>
       <NavBar />
-      <a href="https://github.com/login/oauth/authorize?client_id=79f0eb09798bde55df9e">
+      <a href="https://github.com/login/oauth/authorize?client_id=66b3981eb8fde7a08ffa">
         Sign In with GitHub
       </a>
 

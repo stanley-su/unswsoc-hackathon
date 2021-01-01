@@ -2,7 +2,7 @@ require("dotenv").config();
 import express from "express";
 import request from "superagent";
 
-function signinCallback(req: express.Request, res: express.Response) {
+async function signinCallback(req: express.Request, res: express.Response) {
   const { query } = req;
   const { code } = query;
 
@@ -11,7 +11,7 @@ function signinCallback(req: express.Request, res: express.Response) {
       success: false,
       message: "Can not get code",
     });
-  }
+  };
 
   request
     .post("https://github.com/login/oauth/access_token")
@@ -23,9 +23,7 @@ function signinCallback(req: express.Request, res: express.Response) {
     .set("Accept", "application/json")
     .then(function (result) {
       const data = result.body;
-
-      res.cookie("session", data.access_token);
-      res.redirect("http://localhost:3000");
+      res.send({ "accessToken": data.access_token });
     });
 };
 

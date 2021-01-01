@@ -18,7 +18,7 @@ app.use("/project", projectRouter);
 app.use("/hackathon", hackathonRouter);
 app.use("/comment", commentRouter);
 app.use("/person", personRouter);
-app.use("/user", authRouter);
+app.use("/authentication", authRouter);
 
 app.listen(port, () => {
   console.log(`Backend listening at http://localhost:${port}`);
