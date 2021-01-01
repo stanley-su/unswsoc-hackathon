@@ -20,10 +20,11 @@ passport.deserializeUser(async (id: number, done) => {
 });
 
 passport.use(
+  //@ts-ignore
   new GitHubStrategy(
     {
-      consumerKey: process.env.GITHUB_CLIENT_ID,
-      consumerSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "/auth/github/redirect"
     },
     async (accessToken, refreshToken, profile, done) => {
