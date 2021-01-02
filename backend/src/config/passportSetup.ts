@@ -12,8 +12,8 @@ passport.serializeUser((user, done) => {
 // deserialize the cookieUserId to user in the database
 passport.deserializeUser(async (id: number, done) => {
   try {
-    const user = await userDb.getPerson(id);
-    done(null, user);
+    const user = await userDb.getPersonByGitHub(id);
+    done(null, user.rows[0]);
   } catch (e) {
     done(new Error("Failed to deserialize an user"));
   }
@@ -29,29 +29,18 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       // find current user in UserModel
-      const query = await userDb.getPersonByGitHub(profile.id);
-      const currentUser = query.rows;
+      const user = await userDb.getPersonByGitHub(profile.id);
 
       // create new user if the database doesn't have this user
-      if (!currentUser.length) {
+      if (!user.rows.length) {
         await userDb.createPerson(profile.id);
+        const user = await userDb.getPersonByGitHub(profile.id);
 
-        const query = await userDb.getPersonByGitHub(profile.id);
-        const newUser = query.rows;
-
-        if (newUser.length) {
-          const sessionUser = {
-            id: newUser[0].github_id,
-            name: newUser[0].name
-          }
-          done(null, sessionUser);
+        if (user.rows.length) {
+          done(null, user.rows[0]);
         }
       }
-      const sessionUser = {
-        id: currentUser[0].github_id,
-        name: currentUser[0].name
-      }
-      done(null, sessionUser);
+      done(null, user.rows[0]);
     }
   )
 );
