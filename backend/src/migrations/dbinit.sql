@@ -19,8 +19,8 @@ CREATE TABLE project (
     project_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
-    hackathon_id INT not NULL,
-    person_id INT not NULL,
+    hackathon_id INT NOT NULL,
+    person_id INT NOT NULL,
     submit_date DATE DEFAULT NOW(),
     FOREIGN KEY(hackathon_id) REFERENCES hackathon(hackathon_id),
     FOREIGN KEY(person_id) REFERENCES person(person_id)
